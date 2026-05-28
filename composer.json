@@ -13,24 +13,22 @@
     "laravel/framework": "^13.0",
     "laravel/tinker": "^3.0",
     "openspout/openspout": "^4.29.1",
-    "picqer/php-barcode-generator": "^2.4.2",
+    "picqer/php-barcode-generator": "^3.0",
     "power-components/livewire-powergrid": "^6.0",
     "predis/predis": "^2.3.0",
-    "spatie/shiki-php": "^2.3.2",
+    "spatie/shiki-php": "^2.3.3",
     "stevebauman/purify": "^6.3"
   },
   "require-dev": {
-    "composer/composer": "^2.8.6",
     "laradumps/laradumps": "^5.0",
     "laravel/pail": "^1.2.2",
     "laravel/pint": "^1.24",
-    "laravel/sail": "^1.41.0",
     "mockery/mockery": "^1.6.12",
     "nunomaduro/collision": "^8.7.0",
     "pestphp/pest": "^4.0",
     "pestphp/pest-plugin-browser": "^4.3",
     "pestphp/pest-plugin-laravel": "^4.0",
-    "spatie/laravel-ignition": "^2.9.1"
+    "spatie/laravel-ignition": "^2.12.0"
   },
   "autoload": {
     "files": ["bootstrap/Helpers.php"],
@@ -46,13 +44,15 @@
     }
   },
   "scripts": {
-    "test:pint": "./vendor/bin/pint --test",
-    "test:feature": ["@php artisan config:clear --ansi", "./vendor/bin/pest --order-by random"],
+    "lint": "./vendor/bin/pint",
+    "test:security": "composer audit",
+    "test:feature": "./vendor/bin/pest --order-by random",
+    "test:lint": "./vendor/bin/pint --test",
     "tests": [
-      "@test:pint",
+      "@test:security",
+      "@test:lint",
       "@test:feature"
     ],
-  "pint:fix": "./vendor/bin/pint",
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump", "@php artisan package:discover --ansi"
     ],
